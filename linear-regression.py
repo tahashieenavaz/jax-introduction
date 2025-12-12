@@ -17,13 +17,15 @@ def mse(params, x, y):
     return jnp.mean((preds - y) ** 2)
 
 
+a = 2.0
+b = -3.5
 
 key = jax.random.PRNGKey(0)
 x = jax.random.normal(key, (100, 1))
-a = 2.0
-b = -3.5
 y = a * x[:, 0] + b + jax.random.normal(key, (100,))
+
 params = [jnp.array(0.0), jnp.array(0.0)]
+
 for epoch in range(Configuration.epochs):
     gradients = grad(mse)(params, x[:, 0], y)
     params = [parameter - Configuration.lr * gradient for parameter, gradient in zip(params, gradients)]
