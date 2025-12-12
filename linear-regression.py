@@ -6,7 +6,7 @@ def predict(params, x):
     w,b =params
     return w * x + b
 
-def loss(params, x, y):
+def mse(params, x, y):
     preds = predict(params, x)
     return jnp.mean((preds - y) ** 2)
 
